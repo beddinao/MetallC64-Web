@@ -1,2 +1,1 @@
-# MetallC64-Web
-porting the MetallC64 emulator to the web
+# *`MetallC64-Web`*
