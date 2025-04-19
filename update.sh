@@ -5,8 +5,9 @@ TARGET_NAME=MetallC64
 EMSDK_REPO=https://github.com/emscripten-core/emsdk
 EMSDK_NAME=emsdk
 PARENT_DIR=`pwd`
+COMPILE_DIR=compile-env
 
-mkdir compile-env && cd compile-env
+mkdir $COMPILE_DIR && cd $COMPILE_DIR
 git clone $EMSDK_REPO && cd $EMSDK_NAME
 CUR_PWD=`pwd`
 
@@ -27,7 +28,7 @@ cd $CUR_PWD
 emmake make
 
 cd $PARENT_DIR 
-mv compile-env/MetallC64/MetallC64.wasm compile-env/MetallC64/MetallC64.js assets
+mv $COMPILE_DIR/$TARGET_NAME/MetallC64.wasm $COMPILE_DIR/$TARGET_NAME/MetallC64.js assets
 git add assets && git commit -m "update" && git push
-
+rm -rf $COMPILE_DIR
 
