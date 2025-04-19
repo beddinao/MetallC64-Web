@@ -1,0 +1,94 @@
+:root {
+	--background-0: rgba(0, 0, 0, 0);
+	--background-1: #000;
+	--background-2: linear-gradient(to right top, #202020, rgba(0, 0, 0, 0));
+	--transition-1: 0.3s;
+	--border-1: #626262;
+	--border-2: #393939;
+	--color-1: #fff;
+	--color-2: #9A9A9A;
+	--color-3: #989797;
+	--gap-1: 1em;
+}
+
+@font-face {
+	font-family: ibm;
+	src: url("./fonts/IBMPlexMono-Regular.ttf");
+}
+
+* {
+	margin: 0px; 
+	padding: 0px;
+	box-sizing: border-box;
+	transition-duration: var(--transition-1);
+}
+
+html {
+	height: 100vh;
+	width: 100%;
+	scrollbar-color: var(--border-2) var(--background-1);
+	scrollbar-width: thin;
+}
+
+body, div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	color: var(--color-1);
+	font-style: monospace;
+	font-family: ibm;
+	background: var(--background-0);
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	background: var(--background-1);
+	row-gap: var(--gap-1);
+}
+
+a {
+	display: flex;
+	flex-direction: row;
+	text-decoration: none;
+	&::after, &::before {
+		transition-duration: var(--transition-1);
+		display: block;
+		height: 16px;
+		width: 16px;
+	}
+	&:hover {
+		color: var(--color-1);
+		text-decoration: underline;
+		&::after, &::before { filter: brightness(3) }
+	}
+}
+
+body > div {
+	height: auto;
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	row-gap: var(--gap-1);
+}
+
+.text_1 { color: var(--color-1) }
+.text_2 { color: var(--color-2) }
+.text_3 { color: var(--color-3) }
+
+body > div > div > a {
+	height: 100%;
+	width: 100%;
+	&:after {
+		content: url("./svgs/github.svg");
+		margin-left: 4px;
+	}
+}
+
+body > div > div:nth-child(2) {
+	background-image: var(--background-2);
+	border: 1px solid var(--border-1);
+	padding: var(--gap-1);
+	width: 100%;
+}
