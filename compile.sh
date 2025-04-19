@@ -1,12 +1,14 @@
 #/usr/bin/bash
 
 TARGET_REPO=https://github.com/beddinao/MetallC64
+TARGET_NAME=MetallC64
 EMSDK_REPO=https://github.com/emscripten-core/emsdk
+EMSDK_NAME=emsdk
 PARENT_DIR=`pwd`
 
 mkdir compile-env && cd compile-env
 
-git clone $EMSDK_REPO && cd $EMSDK_REPO
+git clone $EMSDK_REPO && cd $EMSDK_NAME
 
 CUR_PWD=`pwd`
 
@@ -15,7 +17,7 @@ $CUR_PWD/emsdk activate latest
 source emsdk_env.sh
 
 cd ..
-git clone $TARGET_REPO && cd $TARGET_REPO
+git clone $TARGET_REPO && cd $TARGET_NAME
 
 CUR_PWD=`pwd`
 
