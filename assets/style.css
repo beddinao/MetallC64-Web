@@ -99,6 +99,7 @@ body > div > div {
 	justify-content: start;
 	align-items: center;
 	column-gap: var(--gap-1);
+	row-gap: var(--gap-1);
 	flex-wrap:  wrap;
 }
 
@@ -113,6 +114,19 @@ button {
 		color: var(--color-1);
 		border-color: var(--color-1);
 	}
+}
+
+body > div > div:nth-child(3) > button {
+	padding: 4px 4px;
+}
+
+body > div > div:nth-child(4) {
+	border: 1px solid red;	
+	background: var(--background-0);
+}
+
+body > div > div:nth-child(4) > div {
+
 }
 
 textarea {

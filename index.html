@@ -19,10 +19,31 @@
 					<a href="https://github.com/beddinao/MetallC64" target="_blank" ><p class="text_1" style="font-size: 13px;">Original C Project</p></a>
 				</div>
 				<div>
+					<p class="text_3" style="font-size: 11px;">select program to load from collection: </p>
+					<button id="pr_btn">petsciitracing.prg</button>
+					<button id="pr_btn">noslackers.prg</button>
+					<button id="pr_btn">hole_vector.prg</button>
+					<button id="pr_btn">Show_Time.prg</button>
+					<button id="pr_btn">N00NEFUKWITEN0NE.prg</button>
+					<button id="pr_btn">basictetris.prg</button>
+					<button id="pr_btn">bigpixelnyan.prg</button>
+					<button id="pr_btn">monopole.prg</button>
+					<button id="pr_btn">quiet_nights.prg</button>
+					<button id="pr_btn">honcho_of_the_seven_raging_coding_seas.prg</button>
+					<button id="pr_btn">hellas_guys.prg</button>
+					<button id="pr_btn">efucollab.prg</button>
+					<button id="pr_btn">c64com-charged-mikael-spiham.prg</button>
+					<button id="pr_btn">Dark_Faces.prg</button>
+					<button id="pr_btn">Back_to_Nature.prg</button>
+					<button id="pr_btn">2-D_Cube.prg</button>
+				</div>
+				<div>
 					<p class="text_3" style="font-size: 11px;">upload a program to memory (only .prg): </p>
 					<input type="file" accept=".prg" id="input" />
-					<p class="text_3" style="font-size: 11px;">clear program from memory: </p>
-					<button id="clr_button">CLR</button>
+					<div>
+						<p class="text_3" style="font-size: 11px;">clear program from memory: </p>
+						<button id="clr_button">CLR</button>
+					</div>
 				</div>
 				<div>
 					<p class="text_3" style="font-size: 11px;">show status of: </p>
@@ -33,6 +54,18 @@
 				</div>
 			</div>
 			<script async type="text/javascript">
+				var load_file = path => {
+					var result = null;
+					var req = new XMLHttpRequest();
+					req.open("GET", path, false);
+					req.responseType = "arrayBuffer";
+					req.send();
+					console.log(req);
+					if (req.status==200) {
+						result = req.response;
+					}
+					return result;
+				}
 				var output_elem = document.getElementById("console");
 				window.onload = e => {
 					if (output_elem)
@@ -52,6 +85,7 @@
 						const exec_ram_dump = Module.cwrap('exec_ram_dump', null, ['string']);
 						let input = document.getElementById("input"),
 						sh_btns = document.querySelectorAll("#sh_btn"),
+						pr_btns = document.querySelectorAll("#pr_btn"),
 						clr_btn = document.getElementById("clr_button");
 						if (input) {
 							input.onchange = e => {
@@ -68,6 +102,32 @@
 							sh_btns.forEach(btn => {
 								btn.onclick = e => exec_ram_dump(e.target.textContent||e.target.innerText);
 							});
+						if (pr_btns)
+							pr_btns.forEach(btn => {
+								btn.onclick = e => {
+									let target = e.target.textContent||e.target.innerText;
+									const req = new XMLHttpRequest();
+									req.open("GET", "programs/" + target, true);
+									req.responseType = "arraybuffer";
+									req.onload = e => {
+										if (e.target.status == 200) {
+											const arrayBuffer = req.response;
+											if (arrayBuffer) {
+												const byte_array = new Uint8Array(arrayBuffer);
+												exec_ldp(byte_array, byte_array.length);
+											}
+										}
+										else {
+											if (output_elem) {
+												output_elem.value += "can't load file\n";
+												output_elem.scrollTop = output_elem.scrollHeight;
+											}
+										}
+									}
+									req.send();
+								}
+							})
+				
 					}
 				}
 			</script>
