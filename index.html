@@ -15,6 +15,29 @@
 				<div>
 					<a href="https://github.com/beddinao/MetallC64" target="_blank" ><p class="text_1" style="font-size: 13px;">Original Project</p></a>
 				</div>
+				<div>
+					<p class="text_3" style="font-size: 11px;">upload a program to memory (only .prg): </p>
+					<input type="file" accept=".prg" id="input" />
+					<p class="text_3" style="font-size: 11px;">clear program from memory: </p>
+					<button id="button">CLR</button>
+				</div>
 			</div>
+			<script async type="text/javascript">
+				var Module = {
+					onRuntimeInitialized: function() {
+						const exec_clr = Module.cwrap('exec_clr', null);
+						const exec_ldp = Module.cwrap('exec_ldp', null, ['array', 'number'])
+						document.getElementById("input").onchange = e => {
+							const reader = new FileReader();
+							reader.onloadend = e => {
+								let arr = new Uint8Array(e.target.result);
+								exec_ldp(arr, arr.length);
+							}
+							reader.readAsArrayBuffer(e.target.files[0]);
+						}
+						document.getElementById("button").onclick = () => exec_clr();
+					}
+				}
+			</script>
 		</body>
 </html>

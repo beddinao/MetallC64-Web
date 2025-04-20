@@ -86,9 +86,31 @@ body > div > div > a {
 	}
 }
 
-body > div > div:nth-child(2) {
+body > div > div {
 	background-image: var(--background-2);
-	border: 1px solid var(--border-1);
-	padding: var(--gap-1);
+	border: 1px solid var(--border-2);
+	padding: calc(var(--gap-1) / 2);
 	width: 100%;
+}
+
+body > div > div:nth-child(3) {
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	align-items: center;
+	column-gap: var(--gap-1);
+	flex-wrap:  wrap;
+}
+
+button {
+	cursor: pointer;
+	color: var(--color-2);
+	background-color: var(--background-0);
+	border: 1px solid var(--border-1);
+	background-image: var(--background-2);
+	padding: 4px calc(var(--gap-1) * 2);
+	&:hover {
+		color: var(--color-1);
+		border-color: var(--color-1);
+	}
 }
