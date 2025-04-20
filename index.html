@@ -8,12 +8,15 @@
 		<link rel='stylesheet' href='./assets/style.css' >
 	</head>
 		<body>
-			<canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
+			<div>
+				<canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
+				<textarea id="console" rows="16" disabled></textarea>
+			</div>
 			<script async type="text/javascript" src="./assets/MetallC64.js"></script>
 			<div>
 				<p class="text_1" style="font-size: 16px;">MetallC64-Web</p>
 				<div>
-					<a href="https://github.com/beddinao/MetallC64" target="_blank" ><p class="text_1" style="font-size: 13px;">Original Project</p></a>
+					<a href="https://github.com/beddinao/MetallC64" target="_blank" ><p class="text_1" style="font-size: 13px;">Original C Project</p></a>
 				</div>
 				<div>
 					<p class="text_3" style="font-size: 11px;">upload a program to memory (only .prg): </p>
@@ -23,7 +26,19 @@
 				</div>
 			</div>
 			<script async type="text/javascript">
+				var output_elem = document.getElementById("console");
+				window.onload = e => {
+					if (output_elem)
+						output_elem.value = "";
+				}
 				var Module = {
+					print(...args) {
+						if (output_elem) {
+							var text = args.join(' ');
+							output_elem.value += text + "\n";
+							output_elem.scrollTop = output_elem.scrollHeight;
+						}
+					},
 					onRuntimeInitialized: function() {
 						const exec_clr = Module.cwrap('exec_clr', null);
 						const exec_ldp = Module.cwrap('exec_ldp', null, ['array', 'number'])
