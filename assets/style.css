@@ -24,8 +24,6 @@
 }
 
 html {
-	height: 100vh;
-	width: 100%;
 	scrollbar-color: var(--border-2) var(--background-1);
 	scrollbar-width: thin;
 }
@@ -71,6 +69,10 @@ body > div {
 	display: flex;
 	flex-direction: column;
 	row-gap: var(--gap-1);
+}
+
+body > div:nth-child(1) {
+	max-height: 80vh;
 }
 
 .text_1 { color: var(--color-1) }
@@ -121,12 +123,17 @@ body > div > div:nth-child(3) > button {
 }
 
 body > div > div:nth-child(4) {
-	border: 1px solid red;	
 	background: var(--background-0);
+	border: none;
 }
 
 body > div > div:nth-child(4) > div {
-
+	border: 1px solid var(--border-1);
+	background: var(--background-2);
+	padding: var(--gap-1);
+	column-gap: var(--gap-1);
+	display: flex;
+	flex-direction: row;
 }
 
 textarea {
@@ -147,4 +154,5 @@ body > div:nth-child(1) {
 
 canvas {
 	width: 70%;
+	max-height: 70vh;
 }
