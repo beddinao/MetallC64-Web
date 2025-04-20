@@ -35,7 +35,7 @@
 					print(...args) {
 						if (output_elem) {
 							var text = args.join(' ');
-							output_elem.value += text + "\n";
+							output_elem.value += text.trim() + "\n";
 							output_elem.scrollTop = output_elem.scrollHeight;
 						}
 					},
