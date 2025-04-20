@@ -41,31 +41,20 @@
 					<p class="text_3" style="font-size: 11px;">upload a program to memory (only .prg): </p>
 					<input type="file" accept=".prg" id="input" />
 					<div>
+						<p class="text_3" style="font-size: 11px;">show status of: </p>
+						<button id="sh_btn">CPU</button>
+						<button id="sh_btn">VIC-II</button>
+						<button id="sh_btn">CIA-1</button>
+						<button id="sh_btn">CIA-2</button>
+					</div>
+					<div>
 						<p class="text_3" style="font-size: 11px;">clear program from memory: </p>
 						<button id="clr_button">CLR</button>
 					</div>
-				</div>
-				<div>
-					<p class="text_3" style="font-size: 11px;">show status of: </p>
-					<button id="sh_btn">CPU</button>
-					<button id="sh_btn">VIC-II</button>
-					<button id="sh_btn">CIA-1</button>
-					<button id="sh_btn">CIA-2</button>
+					<p class="text_3" style="font-size: 11px;">* type <span style="color:#fff">RUN</span> and hit <span style="color:#fff">ENTER</span> after loading a program</p>
 				</div>
 			</div>
 			<script async type="text/javascript">
-				var load_file = path => {
-					var result = null;
-					var req = new XMLHttpRequest();
-					req.open("GET", path, false);
-					req.responseType = "arrayBuffer";
-					req.send();
-					console.log(req);
-					if (req.status==200) {
-						result = req.response;
-					}
-					return result;
-				}
 				var output_elem = document.getElementById("console");
 				window.onload = e => {
 					if (output_elem)
