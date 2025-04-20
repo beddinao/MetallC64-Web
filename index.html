@@ -22,7 +22,14 @@
 					<p class="text_3" style="font-size: 11px;">upload a program to memory (only .prg): </p>
 					<input type="file" accept=".prg" id="input" />
 					<p class="text_3" style="font-size: 11px;">clear program from memory: </p>
-					<button id="button">CLR</button>
+					<button id="clr_button">CLR</button>
+				</div>
+				<div>
+					<p class="text_3" style="font-size: 11px;">show status of: </p>
+					<button id="sh_btn">CPU</button>
+					<button id="sh_btn">VIC-II</button>
+					<button id="sh_btn">CIA-1</button>
+					<button id="sh_btn">CIA-2</button>
 				</div>
 			</div>
 			<script async type="text/javascript">
@@ -35,22 +42,32 @@
 					print(...args) {
 						if (output_elem) {
 							var text = args.join(' ');
-							output_elem.value += text.trim() + "\n";
+							output_elem.value += text + "\n";
 							output_elem.scrollTop = output_elem.scrollHeight;
 						}
 					},
 					onRuntimeInitialized: function() {
 						const exec_clr = Module.cwrap('exec_clr', null);
-						const exec_ldp = Module.cwrap('exec_ldp', null, ['array', 'number'])
-						document.getElementById("input").onchange = e => {
-							const reader = new FileReader();
-							reader.onloadend = e => {
-								let arr = new Uint8Array(e.target.result);
-								exec_ldp(arr, arr.length);
+						const exec_ldp = Module.cwrap('exec_ldp', null, ['array', 'number']);
+						const exec_ram_dump = Module.cwrap('exec_ram_dump', null, ['string']);
+						let input = document.getElementById("input"),
+						sh_btns = document.querySelectorAll("#sh_btn"),
+						clr_btn = document.getElementById("clr_button");
+						if (input) {
+							input.onchange = e => {
+								const reader = new FileReader();
+								reader.onloadend = e => {
+									let arr = new Uint8Array(e.target.result);
+									exec_ldp(arr, arr.length);
+								}
+								reader.readAsArrayBuffer(e.target.files[0]);
 							}
-							reader.readAsArrayBuffer(e.target.files[0]);
 						}
-						document.getElementById("button").onclick = () => exec_clr();
+						if (clr_btn) clr_btn.onclick = () => exec_clr();
+						if (sh_btns)
+							sh_btns.forEach(btn => {
+								btn.onclick = e => exec_ram_dump(e.target.textContent||e.target.innerText);
+							});
 					}
 				}
 			</script>

@@ -93,7 +93,7 @@ body > div > div {
 	width: 100%;
 }
 
-body > div > div:nth-child(3) {
+body > div > div {
 	display: flex;
 	flex-direction: row;
 	justify-content: start;
