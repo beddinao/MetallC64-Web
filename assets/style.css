@@ -71,6 +71,10 @@ body > div {
 	row-gap: var(--gap-1);
 }
 
+body > div:nth-child(3) {
+	row-gap: 0;
+}
+
 body > div:nth-child(1) {
 	max-height: 80vh;
 }
@@ -123,6 +127,10 @@ button {
 
 body > div > div:nth-child(3) > button {
 	padding: 4px 10px;
+}
+
+body > div:nth-child(3) > p {
+	margin-bottom: var(--gap-1);
 }
 
 body > div > div:nth-child(4) {
