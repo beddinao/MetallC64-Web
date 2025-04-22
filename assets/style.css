@@ -180,7 +180,6 @@ canvas {
 @media screen and (max-width: 1300px), screen and (max-height: 900px) {
 	body > div:nth-child(1) {
 		flex-direction: column;
-		border: 1px solid red;
 		width: 100%;
 	}
 	canvas {
