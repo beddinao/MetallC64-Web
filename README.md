@@ -1,3 +1,3 @@
-# *`MetallC64-Web`*
+# *`commodore_64_emulator_web`*
 
-#### Original Project: <a href="https://github.com/beddinao/MetallC64">MetallC64</a>
+#### original C project: <a href="https://github.com/beddinao/commodore_64_emulator">commodore_64_emulator</a>
